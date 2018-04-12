@@ -5,15 +5,14 @@ importScripts('https://www.gstatic.com/firebasejs/4.12.0/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/4.12.0/firebase-messaging.js');
 
 
-var config = {
-          apiKey: "AIzaSyBYTm-ogUAu73CRxjJ8eGbcxciCoX7E-lA",
-          authDomain: "mscript-a5d48.firebaseapp.com",
-          databaseURL: "https://mscript-a5d48.firebaseio.com",
-          projectId: "mscript-a5d48",
-          storageBucket: "",
-          messagingSenderId: '386489688932'
-        };
-
+ var config = {
+    apiKey: "AIzaSyDNRDMjaawhHjtPZzGK0A8dnMDYAlgA7aM",
+    authDomain: "mscripts-840fe.firebaseapp.com",
+    databaseURL: "https://mscripts-840fe.firebaseio.com",
+    projectId: "mscripts-840fe",
+    storageBucket: "mscripts-840fe.appspot.com",
+    messagingSenderId: "829303146786"
+  };
 
 
 
@@ -49,14 +48,28 @@ var messaging = firebase.messaging();
 // background (Web app is closed or not in browser focus) then you should
 // implement this optional method.
 // [START background_handler]
+/*messaging.setBackgroundMessageHandler(function(payload) {
+
+  console.log(' Received background message ', payload);
+
+const title="hello world";
+    
+    const options = {
+      
+      body: payload.data.status
+    
+    };
+
+    return self.registration.showNotification(title,options);
+});*/
+
+
 messaging.setBackgroundMessageHandler(function(payload) {
+  console.log("siva");
   console.log('[firebase-messaging-sw.js] Received background message ', payload);
   // Customize notification here
-  var notificationTitle = 'Background Message Title';
-  var notificationOptions = {
-    body: 'Background Message body.',
-    icon: '/firebase-logo.png'
-  };
+  var notificationTitle = payload.data.title;
+  var notificationOptions = payload.data;
 
   return self.registration.showNotification(notificationTitle,
     notificationOptions);
